@@ -1,6 +1,23 @@
-FROM node:20
+FROM node:18-alpine
+
+# Рабочая директория
 WORKDIR /app
+
+# Копируем package-файлы
 COPY package*.json ./
-RUN npm install
+
+# Устанавливаем зависимости
+RUN npm ci
+
+# Копируем весь проект
 COPY . .
-CMD ["npm", "run", "dev"]
+
+# Билдим приложение (если Next.js)
+RUN npm run build
+
+# Render ожидает, что сервис слушает порт из $PORT
+ENV PORT=3000
+EXPOSE 3000
+
+# Запуск приложения
+CMD ["npm", "start"]
