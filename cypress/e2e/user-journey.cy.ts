@@ -1,6 +1,6 @@
 describe("User Journey", () => {
   it("a user can find a course on the home page and complete the courses lessons", () => {
-    cy.visit("http://localhost:3000")
+    cy.visit("https://doker-test-production.up.railway.app")
     cy.getByData("course-0").find("a").contains('Get started').click()
     cy.location("pathname").should("equal", "/testing-your-first-application")
     cy.getByData("next-lesson-button").click()
@@ -24,7 +24,7 @@ describe("User Journey", () => {
     cy.getByData("next-lesson-button").should("exist").click()
       cy.url().should(
       "eq",
-      "http://localhost:3000/"
+      "https://doker-test-production.up.railway.app/"
     )
   })
 })

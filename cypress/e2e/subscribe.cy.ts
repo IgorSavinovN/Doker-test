@@ -1,6 +1,6 @@
 describe("Newsletter Subscribe Form", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000")
+    cy.visit("https://doker-test-production.up.railway.app")
   })
 
 it("allows users to subscribe to the email list", () => {

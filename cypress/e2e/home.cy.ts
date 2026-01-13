@@ -1,6 +1,6 @@
 describe("home page", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000")
+    cy.visit("https://docker-test-production.up.railway.app/")
   })
 
   context("Hero section", () => {
@@ -22,7 +22,7 @@ context("Courses section", () => {
    cy.getByData("course-0").find("a").contains("Get started").click()
    cy.url().should(
      "eq",
-     "http://localhost:3000/testing-your-first-application"
+     "https://docker-test-production.up.railway.app/testing-your-first-application"
    )    
     cy.location("pathname").should("equal", "/testing-your-first-application")
   
@@ -33,7 +33,7 @@ context("Courses section", () => {
    cy.getByData("course-1").find("a").contains("Get started").click()
    cy.url().should(
      "eq",
-     "http://localhost:3000/testing-foundations"
+     "https://docker-test-production.up.railway.app/testing-foundations"
    )    
     cy.location("pathname").should("equal", "/testing-foundations")
   
@@ -44,7 +44,7 @@ context("Courses section", () => {
    cy.getByData("course-1").find("a").contains("Get started").click()
    cy.url().should(
      "eq",
-     "http://localhost:3000/testing-foundations"
+     "https://doker-test-production.up.railway.app/"
    )    
     cy.location("pathname").should("equal", "/testing-foundations")
   
@@ -54,7 +54,7 @@ context("Courses section", () => {
    cy.getByData("course-2").find("a").contains("Get started").click()
    cy.url().should(
      "eq",
-     "http://localhost:3000/cypress-fundamentals"
+     "https://docker-test-production.up.railway.app/cypress-fundamentals"
    )    
     cy.location("pathname").should("equal", "/cypress-fundamentals")
   
