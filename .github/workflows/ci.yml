@@ -4,12 +4,13 @@ on:
   push:
     branches:
       - start
+
   workflow_dispatch:
     inputs:
       base_url:
         description: "Base URL for Cypress tests"
         required: true
-        default: "https://docker-test.onrender.com"
+        default: https://docker-test.onrender.com
 
 jobs:
   cypress-tests:
@@ -27,7 +28,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Wait for app to be ready
+        run: npx wait-on ${{ github.event.inputs.base_url || 'https://docker-test.onrender.com' }}
+
       - name: Run Cypress tests
         env:
-          CYPRESS_BASE_URL: ${{ github.event.inputs.base_url }}
+          CYPRESS_BASE_URL: ${{ github.event.inputs.base_url || 'https://docker-test.onrender.com' }}
         run: npx cypress run
