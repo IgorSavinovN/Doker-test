@@ -9,8 +9,8 @@ on:
     inputs:
       base_url:
         description: "Base URL for Cypress tests"
-        required: true
-        default: https://docker-test.onrender.com
+        required: false
+        default: "https://docker-test.onrender.com"
 
 jobs:
   cypress-tests:
@@ -24,14 +24,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Set BASE_URL
+        run: echo "BASE_URL=${{ github.event.inputs.base_url || 'https://docker-test.onrender.com' }}" >> $GITHUB_ENV
+
       - name: Wait for app to be ready
-        run: npx wait-on ${{ github.event.inputs.base_url || 'https://docker-test.onrender.com' }}
+        run: npx wait-on $BASE_URL
 
       - name: Run Cypress tests
         env:
-          CYPRESS_BASE_URL: ${{ github.event.inputs.base_url || 'https://docker-test.onrender.com' }}
+          CYPRESS_BASE_URL: ${{ env.BASE_URL }}
         run: npx cypress run
