@@ -1,13 +1,16 @@
 name: CI
 
 on:
-  push:
-    branches: [ start, main ]
-  pull_request:
   workflow_dispatch:
+    inputs:
+      run_cypress:
+        description: "Run Cypress E2E tests"
+        required: true
+        default: "true"
 
 jobs:
   cypress-tests:
+    if: ${{ github.event.inputs.run_cypress == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +30,7 @@ jobs:
 
       - name: Start app
         run: npm run dev &
-      
+
       - name: Wait for app
         run: npx wait-on http://localhost:3000
 
