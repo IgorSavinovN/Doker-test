@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
 
       - name: Install dependencies
@@ -33,7 +33,7 @@ jobs:
         run: echo "BASE_URL=${{ github.event.inputs.base_url || 'https://docker-test.onrender.com' }}" >> $GITHUB_ENV
 
       - name: Wait for app to be ready
-        run: npx wait-on $BASE_URL
+        run: npx wait-on@7 $BASE_URL
 
       - name: Run Cypress tests
         env:
