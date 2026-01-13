@@ -1,15 +1,27 @@
-{
-  "name": "your-project-name",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p $PORT -H 0.0.0.0"
-  },
-  "dependencies": {
-    // other dependencies here, excluding 'serve' and 'react-scripts'
-  },
-  "devDependencies": {
-    // other devDependencies here, excluding 'serve' and 'react-scripts'
-  }
-}
+name: CI Build
+
+on:
+  push:
+    branches:
+      - start
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
