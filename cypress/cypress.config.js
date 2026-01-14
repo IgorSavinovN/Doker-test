@@ -1,3 +1,12 @@
+import { defineConfig } from "cypress";
+
+export default defineConfig({
+  e2e: {
+    baseUrl: "https://doker-test-production.up.railway.app",
+    chromeWebSecurity: false,
+  },
+});
+
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
