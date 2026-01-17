@@ -1,0 +1,28 @@
+name: Run Cypress Tests (Manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests against production
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+        env:
+          CYPRESS_BASE_URL: https://doker-test-production.up.railway.app
