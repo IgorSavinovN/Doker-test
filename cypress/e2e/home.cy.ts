@@ -1,6 +1,6 @@
 describe("home page", () => {
   beforeEach(() => {
-    cy.visit("/")
+    cy.visit("https://doker-test-production.up.railway.app/")
   })
 
   context("Hero section", () => {
