@@ -2,12 +2,10 @@
   "name": "cypress-realworld-testing-course-app",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+"scripts": {
+  "build": "next build",
+  "start": "next start"
+},
   "dependencies": {
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^1.0.6",
