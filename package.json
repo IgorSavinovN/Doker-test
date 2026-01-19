@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
 "scripts": {
-  "build": "next build",
-  "start": "next start"
+  "dev": "next dev",
+  "build": "next build"
 },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
