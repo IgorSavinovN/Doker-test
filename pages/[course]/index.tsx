@@ -4,10 +4,17 @@ import CourseHero from "../../components/Course/CourseHero"
 import CourseContent from "../../components/Course/CourseContent"
 import { progressService } from "../../machines/progressService"
 
-export default function HomePage({ courses, content }) {
-  // Берём первый курс для отображения на главной
-  const firstCourse = Object.keys(content)[0]
-  const { title, lessons, description, learnFeatures } = content[firstCourse]
+export default function HomePage({ courses = {}, content = {} }) {
+  // 🔒 Защита от prerender / undefined
+  const courseKeys = Object.keys(content)
+
+  if (courseKeys.length === 0) {
+    return null
+  }
+
+  const firstCourse = courseKeys[0]
+  const { title, lessons, description, learnFeatures, image } =
+    content[firstCourse]
 
   return (
     <Layout content={content} courses={courses} progressService={progressService}>
@@ -19,7 +26,7 @@ export default function HomePage({ courses, content }) {
       <CourseHero
         title={title}
         description={description}
-        image={content[firstCourse].image}
+        image={image}
       />
 
       <CourseContent
@@ -32,4 +39,3 @@ export default function HomePage({ courses, content }) {
     </Layout>
   )
 }
-
