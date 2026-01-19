@@ -1,41 +1,49 @@
 import Head from "next/head"
 import Layout from "../../components/Layout"
-import CourseHero from "../../components/Course/CourseHero"
-import CourseContent from "../../components/Course/CourseContent"
+import Link from "next/link"
+import { useRouter } from "next/router"
 import { progressService } from "../../machines/progressService"
 
-export default function HomePage({ courses = {}, content = {} }) {
-  // 🔒 Защита от prerender / undefined
-  const courseKeys = Object.keys(content)
+const mockCourses = {
+  "testing-nextjs": {
+    title: "Testing Next.js Applications with Cypress",
+    description: "Learn how to test Next.js apps",
+    lessons: ["intro", "selectors", "network"],
+  },
+  "advanced-cypress": {
+    title: "Advanced Cypress",
+    description: "Advanced Cypress techniques",
+    lessons: ["commands", "stubbing", "ci"],
+  },
+}
 
-  if (courseKeys.length === 0) {
-    return null
-  }
+export default function CoursePage() {
+  const router = useRouter()
+  const { course } = router.query
 
-  const firstCourse = courseKeys[0]
-  const { title, lessons, description, learnFeatures, image } =
-    content[firstCourse]
+  const data = mockCourses[course as string]
+  if (!data) return null
 
   return (
-    <Layout content={content} courses={courses} progressService={progressService}>
+    <Layout courses={mockCourses} content={{}} progressService={progressService}>
       <Head>
-        <title>{title} | Cypress Real World Testing</title>
-        <meta name="description" content={description} />
+        <title>{data.title}</title>
       </Head>
 
-      <CourseHero
-        title={title}
-        description={description}
-        image={image}
-      />
+      <div className="max-w-3xl mx-auto py-12">
+        <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+        <p className="text-gray-600 mb-8">{data.description}</p>
 
-      <CourseContent
-        title={title}
-        lessons={lessons}
-        learnFeatures={learnFeatures}
-        progressService={progressService}
-        course={firstCourse}
-      />
+        <ul className="space-y-3">
+          {data.lessons.map((lesson) => (
+            <li key={lesson}>
+              <Link href={`/${course}/${lesson}`} className="text-blue-600 hover:underline">
+                {lesson}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </Layout>
   )
 }
