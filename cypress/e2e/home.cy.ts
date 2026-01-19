@@ -1,6 +1,6 @@
 describe("home page", () => {
   beforeEach(() => {
-    cy.visit("https://doker-test-woad.vercel.app/testing-your-first-application")
+    cy.visit("https://vercel.com/savinovins-projects/doker-test")
   })
 
   context("Hero section", () => {

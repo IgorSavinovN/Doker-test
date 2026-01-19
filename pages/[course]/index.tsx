@@ -1,9 +1,8 @@
 import Head from "next/head"
-import Layout from "../components/Layout"
-import CourseHero from "../components/Course/CourseHero"
-import CourseContent from "../components/Course/CourseContent"
-import { progressService } from "../machines/progressService"
-import { fetchCourses } from "../lib/fetch-courses"
+import Layout from "../../components/Layout"
+import CourseHero from "../../components/Course/CourseHero"
+import CourseContent from "../../components/Course/CourseContent"
+import { progressService } from "../../machines/progressService"
 
 export default function HomePage({ courses, content }) {
   // Берём первый курс для отображения на главной
@@ -34,14 +33,3 @@ export default function HomePage({ courses, content }) {
   )
 }
 
-export async function getStaticProps() {
-  const coursesJson = await fetchCourses()
-  const courses = Object.keys(coursesJson)
-
-  return {
-    props: {
-      courses,
-      content: coursesJson,
-    },
-  }
-}

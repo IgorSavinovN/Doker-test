@@ -1,9 +1,3 @@
 {
-  "extends": [
-    "next", 
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
-  ]
+  "extends": ["next"]
 }
