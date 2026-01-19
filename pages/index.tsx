@@ -1,27 +1,17 @@
-import Link from "next/link"
 import { fetchCourses } from "../lib/fetch-courses"
 
-export default function Home({ courses }) {
-  return (
-    <div style={{ padding: 24 }}>
-      <h1>Courses</h1>
-      <ul>
-        {courses.map((course) => (
-          <li key={course}>
-            <Link href={`/${course}`}>{course}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const coursesJson = await fetchCourses()
+  const firstCourse = Object.keys(coursesJson)[0]
 
   return {
-    props: {
-      courses: Object.keys(coursesJson),
+    redirect: {
+      destination: `/${firstCourse}`,
+      permanent: false,
     },
   }
+}
+
+export default function Home() {
+  return null
 }
