@@ -1,6 +1,6 @@
 describe("home page", () => {
   beforeEach(() => {
-    cy.visit("https://doker-test-production.up.railway.app/")
+    cy.visit("https://doker-test-woad.vercel.app/testing-your-first-application")
   })
 
   context("Hero section", () => {
